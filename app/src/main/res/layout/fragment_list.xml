@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.mvvm.weatherapp.ui.SharedMainViewModel" />
+
+        <variable
+            name="adapter"
+            type="com.mvvm.weatherapp.ui.citylist.CityListAdapter" />
+
+        <variable
+            name="navigator"
+            type="com.mvvm.weatherapp.ui.citylist.ListNavigator" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_light"
+        android:orientation="vertical"
+        tools:context=".ui.citylist.ListFragment">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/cityRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:setAdapter="@{adapter}" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:background="@color/color_grey_trans"
+                android:onClick="@{()->navigator.goSearch()}"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end"
+                    android:paddingStart="15dp"
+                    android:src="@drawable/circle_add"
+                    android:tint="@color/color_white" />
+            </FrameLayout>
+
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+</layout>

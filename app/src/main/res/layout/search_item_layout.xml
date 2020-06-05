@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.mvvm.weatherapp.data.model.CityModel" />
+
+        <variable
+            name="viewModel"
+            type="com.mvvm.weatherapp.ui.SharedMainViewModel" />
+
+        <variable
+            name="listener"
+            type="com.mvvm.weatherapp.ui.search.SearchNavigator" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="@{()->listener.onItemClick(model)}"
+        android:padding="5dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:text="@{model.city}"
+            android:textColor="@color/color_dark_alt"
+            android:textSize="15sp" />
+
+    </FrameLayout>
+</layout>

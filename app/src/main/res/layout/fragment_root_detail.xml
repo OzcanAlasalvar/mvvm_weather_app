@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="adapter"
+            type="com.mvvm.weatherapp.ui.detail.adapter.DetailPagerAdapter" />
+
+        <variable
+            name="navigator"
+            type="com.mvvm.weatherapp.ui.detail.DetailsNavigation" />
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.detail.RootDetailFragment">
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:setAdapter="@{adapter}" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/color_grey_trans"
+            android:onClick="@{()->navigator.goList()}"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:paddingStart="15dp"
+                android:src="@drawable/menu_icon"
+                android:tint="@color/color_white"
+                tools:ignore="RtlSymmetry" />
+        </FrameLayout>
+    </FrameLayout>
+</layout>
