@@ -1,11 +1,11 @@
-package com.mvvm.weatherapp.data.repository
+package com.mvvm.weatherapp.data.repository.data_source.remote
 
 import com.mvvm.weatherapp.data.model.CityModel
 import com.mvvm.weatherapp.data.model.ForecastModel
 import io.reactivex.Observable
 import io.reactivex.Single
 
-interface RemoteDataSource {
+interface RemoteSource {
 
     fun fetchCities(): Observable<List<CityModel>>
 

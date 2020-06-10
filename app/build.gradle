@@ -14,9 +14,8 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-        buildConfigField "String", "WEATHER_BASE_URL", '"https://api.openweathermap.org/data/2.5/"'
+        buildConfigField "String", "FORECAST_BASE_URL", '"https://api.openweathermap.org/data/2.5/"'
         buildConfigField "String", "CITY_BASE_URL", '"https://raw.githubusercontent.com/maksatgavara/mockServer/master/"'
-        buildConfigField "String", "API_ID", '"16913916707d05f5962f11708a02c21a"'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -70,7 +69,7 @@ dependencies {
     kapt "androidx.room:room-compiler:$roomVersion"
     implementation "androidx.room:room-ktx:$roomVersion"
     kapt "android.arch.persistence.room:compiler:1.1.1"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.2"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.4"
 
     implementation "androidx.navigation:navigation-fragment-ktx:$navVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navVersion"
@@ -90,4 +89,7 @@ dependencies {
     implementation "com.android.support:design:$supportVersion"
 
     implementation "androidx.preference:preference:$preferencesVersion"
+
+    implementation 'com.google.dagger:dagger:2.22'
+    kapt 'com.google.dagger:dagger-compiler:2.22'
 }

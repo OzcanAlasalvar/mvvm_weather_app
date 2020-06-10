@@ -7,13 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import com.mvvm.weatherapp.App
 import com.mvvm.weatherapp.R
+import com.mvvm.weatherapp.base.BaseFragment
 import com.mvvm.weatherapp.databinding.FragmentDetailBinding
 import com.mvvm.weatherapp.ui.detail.adapter.DailyForecastAdapter
 import com.mvvm.weatherapp.ui.detail.adapter.HourlyForecastAdapter
+import javax.inject.Inject
 
-class DetailFragment : Fragment() {
+class DetailFragment :Fragment() {
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private var cityID: Int = 0
     private lateinit var binding: FragmentDetailBinding
@@ -40,6 +47,7 @@ class DetailFragment : Fragment() {
         arguments?.getInt(ARGUMENT_NAME)?.let {
             cityID = it
         }
+        App.INSTANCE.getAppComponent().inject(this)
     }
 
     override fun onCreateView(
@@ -53,7 +61,8 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(cityID.toString(), DetailViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory)
+            .get(cityID.toString(), DetailViewModel::class.java)
         binding.dailyAdapter = dailyAdapter
         binding.hourlyAdapter = hourlyAdapter
 
@@ -86,5 +95,8 @@ class DetailFragment : Fragment() {
             }
         })
     }
+
+
+
 
 }

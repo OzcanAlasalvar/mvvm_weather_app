@@ -1,9 +1,9 @@
-package com.mvvm.weatherapp.data.repository
+package com.mvvm.weatherapp.data.repository.data_source.local
 
 import com.mvvm.weatherapp.data.model.CityModel
 import io.reactivex.Observable
 
-interface LocalDataSource {
+interface LocalSource {
 
     fun saveCity(city: CityModel): Observable<Long>
 

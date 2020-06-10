@@ -1,22 +1,15 @@
 package com.mvvm.weatherapp.ui.detail
 
-import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import com.mvvm.weatherapp.base.BaseViewModel
 import com.mvvm.weatherapp.data.model.CityModel
 import com.mvvm.weatherapp.data.model.ForecastModel
-import com.mvvm.weatherapp.data.repository.LocalSource
-import com.mvvm.weatherapp.data.repository.RemoteSource
 import com.mvvm.weatherapp.data.repository.Repository
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 
-class DetailViewModel(application: Application) : BaseViewModel(application) {
-
-    private val disposable = CompositeDisposable()
-    private val repository = Repository(LocalSource, RemoteSource)
+class DetailViewModel(private val repository: Repository) : BaseViewModel() {
 
     val city = MutableLiveData<CityModel>()
     val forecast = MutableLiveData<ForecastModel>()
@@ -43,6 +36,7 @@ class DetailViewModel(application: Application) : BaseViewModel(application) {
                 override fun onSuccess(t: ForecastModel) {
                     forecast.value = t
                 }
+
                 override fun onError(e: Throwable) {
 
                 }

@@ -1,14 +1,14 @@
-package com.mvvm.weatherapp.data.repository
+package com.mvvm.weatherapp.data.repository.data_source.local
 
-import com.mvvm.weatherapp.App
 import com.mvvm.weatherapp.data.local.AppDao
-import com.mvvm.weatherapp.data.local.AppDatabase
 import com.mvvm.weatherapp.data.model.CityModel
 import io.reactivex.Observable
+import javax.inject.Inject
 
-object LocalSource : LocalDataSource {
+class LocalDataSource @Inject constructor(private val dao: AppDao) :
+    LocalSource {
 
-    private val dao: AppDao = AppDatabase(App.INSTANCE).appDao()
+//    private val dao: AppDao = AppDatabase(App.INSTANCE).appDao()
 
     override fun saveCity(city: CityModel): Observable<Long> {
         return Observable.fromCallable {

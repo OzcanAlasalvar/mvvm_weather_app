@@ -1,19 +1,14 @@
 package com.mvvm.weatherapp.ui
 
-import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import com.mvvm.weatherapp.base.BaseViewModel
 import com.mvvm.weatherapp.data.model.CityModel
-import com.mvvm.weatherapp.data.repository.LocalSource
 import com.mvvm.weatherapp.data.repository.Repository
-import com.mvvm.weatherapp.data.repository.RemoteSource
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-class SharedMainViewModel(application: Application) : BaseViewModel(application) {
-    val disposable = CompositeDisposable()
-    val repository = Repository(LocalSource, RemoteSource)
+class SharedMainViewModel(private val repository: Repository) :
+    BaseViewModel() {
 
     val cities = MutableLiveData<List<CityModel>>() //all cities from respository
     val searchedCities = MutableLiveData<List<CityModel>>() //search result
@@ -67,6 +62,5 @@ class SharedMainViewModel(application: Application) : BaseViewModel(application)
 
     override fun onCleared() {
         super.onCleared()
-        disposable.clear()
     }
 }

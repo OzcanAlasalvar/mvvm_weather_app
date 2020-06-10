@@ -2,19 +2,22 @@ package com.mvvm.weatherapp.data.repository
 
 import com.mvvm.weatherapp.data.model.CityModel
 import com.mvvm.weatherapp.data.model.ForecastModel
-import com.mvvm.weatherapp.data.remote.ApiInterface
+import com.mvvm.weatherapp.data.remote.ForeCastApiService
+import com.mvvm.weatherapp.data.repository.data_source.local.LocalDataSource
+import com.mvvm.weatherapp.data.repository.data_source.remote.RemoteDataSource
 import io.reactivex.Observable
 import io.reactivex.Single
+import javax.inject.Inject
 
-class Repository(
-    private val localDataSource: LocalDataSource,
-    private val remoteDataSource: RemoteDataSource
+class Repository @Inject constructor(
+    private val localSource: LocalDataSource,
+    private val remoteSource: RemoteDataSource
 ) {
 
     fun fetchCities(): Observable<List<CityModel>> {
         return Observable.concatArray(
-            localDataSource.fetchCities(),
-            remoteDataSource.fetchCities()
+            localSource.fetchCities(),
+            remoteSource.fetchCities()
                 .doOnNext { cities ->
                     cities?.let {
                         saveCities(it)
@@ -26,34 +29,34 @@ class Repository(
     }
 
     private fun saveCities(cities: List<CityModel>) {
-        localDataSource.saveCities(cities)
+        localSource.saveCities(cities)
     }
 
     fun saveCity(city: CityModel): Observable<Long> {
-        return localDataSource.saveCity(city)
+        return localSource.saveCity(city)
     }
 
     fun filterCities(cityName: String): Observable<List<CityModel>> {
-        return localDataSource.filterByName(cityName)
+        return localSource.filterByName(cityName)
     }
 
     fun getFavorites(): Observable<List<CityModel>> {
-        return localDataSource.getFavorites()
+        return localSource.getFavorites()
     }
 
     fun getCityById(id: Int): Observable<CityModel> {
-        return localDataSource.getCityWithId(id)
+        return localSource.getCityWithId(id)
     }
 
     fun fetchForeCastResult(
         city: CityModel,
         appId: String
     ): Single<ForecastModel> {
-        return remoteDataSource.fetchForeCast(
+        return remoteSource.fetchForeCast(
             city.lat!!,
             city.lon!!,
             "minutely",
-            ApiInterface.CELCIUS,
+            ForeCastApiService.CELCIUS,
             appId
         )
     }
