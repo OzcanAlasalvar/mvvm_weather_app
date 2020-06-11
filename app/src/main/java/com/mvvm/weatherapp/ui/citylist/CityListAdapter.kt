@@ -11,7 +11,6 @@ import com.mvvm.weatherapp.databinding.ListCityItemBinding
 class CityListAdapter(val cityList: ArrayList<CityModel>, val listener: ListNavigator) :
     RecyclerView.Adapter<CityListAdapter.ViewHolder>() {
 
-
     class ViewHolder(var binding: ListCityItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(model: CityModel, listener: ListNavigator, position: Int) {
@@ -29,9 +28,7 @@ class CityListAdapter(val cityList: ArrayList<CityModel>, val listener: ListNavi
             parent,
             false
         )
-        return ViewHolder(
-            binding
-        )
+        return ViewHolder(binding)
     }
 
     override fun getItemCount(): Int = cityList.size
