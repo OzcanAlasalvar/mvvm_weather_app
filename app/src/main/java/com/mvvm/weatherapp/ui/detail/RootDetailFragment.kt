@@ -12,6 +12,7 @@ import androidx.navigation.Navigation
 import com.mvvm.weatherapp.R
 import com.mvvm.weatherapp.databinding.FragmentRootDetailBinding
 import com.mvvm.weatherapp.ui.SharedMainViewModel
+import com.mvvm.weatherapp.ui.citylist.ListFragmentDirections
 import com.mvvm.weatherapp.ui.detail.adapter.DetailPagerAdapter
 
 class RootDetailFragment : Fragment(), DetailsNavigation {
@@ -19,6 +20,8 @@ class RootDetailFragment : Fragment(), DetailsNavigation {
     private val viewModel: SharedMainViewModel by activityViewModels()
     private lateinit var binding: FragmentRootDetailBinding
     private lateinit var pagerAdapter: DetailPagerAdapter
+
+    private var index: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +43,11 @@ class RootDetailFragment : Fragment(), DetailsNavigation {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        arguments?.let {
+            index = RootDetailFragmentArgs.fromBundle(it).selectedCity
+        }
+
         pagerAdapter = DetailPagerAdapter(childFragmentManager, arrayListOf())
         binding.adapter = pagerAdapter
         binding.navigator = this
@@ -53,6 +61,7 @@ class RootDetailFragment : Fragment(), DetailsNavigation {
             list?.let {
                 binding.viewPager.offscreenPageLimit = it.size
                 pagerAdapter.notifyDataSetChanges(it)
+                binding.viewPager.currentItem = index
             }
         })
     }

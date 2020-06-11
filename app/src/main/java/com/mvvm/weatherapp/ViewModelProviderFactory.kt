@@ -10,7 +10,6 @@ import javax.inject.Inject
 class ViewModelProviderFactory @Inject constructor(private val repository: Repository) :
     ViewModelProvider.Factory {
 
-
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(SharedMainViewModel::class.java))
             return SharedMainViewModel(repository) as T

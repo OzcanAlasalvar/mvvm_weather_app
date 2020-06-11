@@ -14,15 +14,15 @@ class CityListAdapter(val cityList: ArrayList<CityModel>, val listener: ListNavi
 
     class ViewHolder(var binding: ListCityItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(model: CityModel, listener: ListNavigator) {
+        fun bind(model: CityModel, listener: ListNavigator, position: Int) {
             binding.model = model
+            binding.position = position
             binding.listener = listener
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-//        val view = inflater.inflate(R.layout.list_city_item, parent, false)
         val binding = DataBindingUtil.inflate<ListCityItemBinding>(
             inflater,
             R.layout.list_city_item,
@@ -37,13 +37,12 @@ class CityListAdapter(val cityList: ArrayList<CityModel>, val listener: ListNavi
     override fun getItemCount(): Int = cityList.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(cityList[position], listener)
+        holder.bind(cityList[position], listener, position)
     }
 
     fun notifyChanges(list: List<CityModel>) {
         cityList.clear()
         cityList.addAll(list)
         notifyDataSetChanged()
-
     }
 }

@@ -1,47 +1,29 @@
 package com.mvvm.weatherapp.ui.search
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
 
 import com.mvvm.weatherapp.R
+import com.mvvm.weatherapp.base.BaseFragment
 import com.mvvm.weatherapp.data.model.CityModel
 import com.mvvm.weatherapp.databinding.FragmentSearchBinding
 import com.mvvm.weatherapp.ui.SharedMainViewModel
 
-class SearchFragment : Fragment(),
+class SearchFragment : BaseFragment<FragmentSearchBinding, SharedMainViewModel>(),
     SearchNavigator {
 
-    private val viewModel: SharedMainViewModel by activityViewModels()
     private lateinit var adapter: SearchAdapter
-    private lateinit var binding: FragmentSearchBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override val mViewModel: SharedMainViewModel by activityViewModels()
 
-    }
+    override fun getLayoutResId(): Int = R.layout.fragment_search
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    override fun init() {
         adapter = SearchAdapter(
             arrayListOf(),
-            viewModel,
+            mViewModel,
             this
         )
         binding.adapter = adapter
@@ -52,7 +34,7 @@ class SearchFragment : Fragment(),
             override fun onQueryTextChange(query: String?): Boolean {
                 query?.let {
                     val lower = it.toLowerCase()
-                    viewModel.findCity(lower.capitalize())
+                    mViewModel.findCity(lower.capitalize())
                 }
                 return true
             }
@@ -66,7 +48,7 @@ class SearchFragment : Fragment(),
     }
 
     private fun observeLiveData() {
-        viewModel.searchedCities.observe(viewLifecycleOwner, Observer { list ->
+        mViewModel.searchedCities.observe(viewLifecycleOwner, Observer { list ->
             list?.let {
                 adapter.notifyChanges(it)
             }
@@ -76,10 +58,10 @@ class SearchFragment : Fragment(),
 
     override fun onItemClick(city: CityModel) {
         binding.searchView.clearFocus()
-        viewModel.saveFavorites(city)
-        viewModel.savedFav.observe(viewLifecycleOwner, Observer {
+        mViewModel.saveFavorites(city)
+        mViewModel.savedFav.observe(viewLifecycleOwner, Observer {
             if (it) {
-                viewModel.getFavorites()
+                mViewModel.getFavorites()
                 navigateDirection(SearchFragmentDirections.actionSearchFragmentToListFragment())
             }
         })
@@ -90,8 +72,8 @@ class SearchFragment : Fragment(),
         navigateDirection(SearchFragmentDirections.actionSearchFragmentToListFragment())
     }
 
-    private fun navigateDirection(aciton: NavDirections) {
-        Navigation.findNavController(this.requireView()).navigate(aciton)
+    private fun navigateDirection(action: NavDirections) {
+        Navigation.findNavController(this.requireView()).navigate(action)
     }
 
 }

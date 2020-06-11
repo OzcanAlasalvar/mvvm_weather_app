@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.mvvm.weatherapp.App
 import com.mvvm.weatherapp.R
-import com.mvvm.weatherapp.base.BaseFragment
 import com.mvvm.weatherapp.databinding.FragmentDetailBinding
 import com.mvvm.weatherapp.ui.detail.adapter.DailyForecastAdapter
 import com.mvvm.weatherapp.ui.detail.adapter.HourlyForecastAdapter
@@ -95,8 +94,5 @@ class DetailFragment :Fragment() {
             }
         })
     }
-
-
-
 
 }

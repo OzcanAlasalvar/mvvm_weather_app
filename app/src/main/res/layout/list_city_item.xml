@@ -11,12 +11,16 @@
             name="listener"
             type="com.mvvm.weatherapp.ui.citylist.ListNavigator" />
 
+        <variable
+            name="position"
+            type="Integer" />
+
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{()->listener.goDetail(model)}"
+        android:onClick="@{()->listener.goDetail(model,position)}"
         android:orientation="vertical">
 
         <FrameLayout

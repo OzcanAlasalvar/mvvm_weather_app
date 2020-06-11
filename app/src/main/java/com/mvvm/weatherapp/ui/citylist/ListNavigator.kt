@@ -6,5 +6,5 @@ interface ListNavigator {
 
     fun goSearch()
 
-    fun goDetail(city: CityModel)
+    fun goDetail(city: CityModel, position: Int)
 }
