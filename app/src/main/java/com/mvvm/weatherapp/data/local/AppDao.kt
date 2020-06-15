@@ -7,9 +7,6 @@ import io.reactivex.Observable
 @Dao
 interface AppDao {
 
-//    @Insert(onConflict = OnConflictStrategy.REPLACE)
-//    fun insertAll(vararg cityInfo: CityModel): List<Long>
-
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertAll(cities: List<CityModel>)
 

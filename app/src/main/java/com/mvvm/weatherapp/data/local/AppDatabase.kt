@@ -10,28 +10,4 @@ import com.mvvm.weatherapp.data.model.CityModel
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun appDao(): AppDao
-
-//    companion object {
-//
-//        @Volatile //can works different threads
-//        private var instance: AppDatabase? = null
-//
-//        private val lock = Any()
-//
-//        operator fun invoke(context: Context) = instance ?: synchronized(lock) {
-//            instance ?: createDB(context).also {
-//                instance = it
-//            }
-//        }
-//
-//        private fun createDB(context: Context) =
-//            Room.databaseBuilder(
-//                context.applicationContext,
-//                AppDatabase::class.java,
-//                "app.db"
-//            ).build()
-//
-//    }
-
-
 }

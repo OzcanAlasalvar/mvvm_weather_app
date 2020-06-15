@@ -31,23 +31,6 @@ data class CityModel(
 )
 
 
-@Entity(tableName = "favModel")
-data class CityFavModel(
-    @PrimaryKey
-    var id: Int,
-    @ColumnInfo(name = "city")
-    val city: String?,
-    @ColumnInfo(name = "lat")
-    val lat: String?,
-    @ColumnInfo(name = "lon")
-    val lon: String?,
-    @ColumnInfo(name = "country")
-    val country: String?,
-    @ColumnInfo(name = "prov")
-    val prov: String?
-)
-
-
 
 
 
