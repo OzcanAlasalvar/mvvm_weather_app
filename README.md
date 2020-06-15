@@ -7,7 +7,7 @@ This repository contains a detailed sample app that implements MVVM architecture
   <img src="https://user-images.githubusercontent.com/66948288/84705704-7c95bd80-af64-11ea-85cc-a4f8dc435057.png" width="250">
 </p>
 <br>
-
+ 
 #### The app has following packages:
 1. **base**: It contains BaseActivity, BaseFragment and BaseViewModel patterns.
 2. **data**: It contains all the data accessing and manipulating components.
