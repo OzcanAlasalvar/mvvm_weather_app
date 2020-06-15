@@ -19,6 +19,7 @@ class ListFragment : BaseFragment<FragmentListBinding, SharedMainViewModel>(), L
     override fun getLayoutResId(): Int = R.layout.fragment_list
 
     override fun init() {
+
         binding.adapter = adapter
         binding.navigator = this
         mViewModel.getFavorites()
