@@ -14,9 +14,10 @@ This repository contains a detailed sample app that implements MVVM architecture
 3. **di**: Dependency providing classes using Dagger2.
 4. **ui**: View classes along with their corresponding ViewModel.
 5. **util**: Utility classes.
+<br>
 
-
-
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/66948288/84710594-32650a00-af6d-11ea-9dc8-4afde65cb1ed.png" width="500"> </p>
 
 ### License
 ```
